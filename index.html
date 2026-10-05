@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NxtWave Growth Engine | Build Your First AI Project in 60 Mins</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.2s ease, color 0.2s ease; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .custom-scroll::-webkit-scrollbar { width: 5px; }
+    .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 9999px; }
+    
+    .tier-transition { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+    .fade-enter { animation: fadeIn 0.25s ease-in-out; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-[#050811] dark:text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white">
+
+  <!-- ========================================== -->
+  <!-- TOP NAVIGATION HEADER                      -->
+  <!-- ========================================== -->
+  <header class="border-b border-slate-200 dark:border-slate-800/80 bg-white/95 dark:bg-[#090f1d]/95 backdrop-blur sticky top-0 z-50 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center space-x-3">
+        <div class="h-10 w-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md">
+          <i data-lucide="zap" class="w-5 h-5 text-white"></i>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 dark:text-white">NxtWave</span>
+            <span class="text-[11px] px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 font-bold border border-blue-200 dark:border-blue-800">Growth Engine</span>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">"Build Your First AI Project in 60 Mins" &bull; 500 Goal</p>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="flex items-center bg-slate-100 dark:bg-[#070d1a] p-1 rounded-xl border border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-semibold transition-colors">
+        <button id="tab-student-btn" onclick="switchTab('student')" class="tab-btn px-3 sm:px-4 py-1.5 rounded-lg transition flex items-center space-x-2 bg-blue-600 text-white shadow">
+          <i data-lucide="rocket" class="w-4 h-4"></i>
+          <span>1. Student Engine</span>
+        </button>
+        <button id="tab-whatsapp-btn" onclick="switchTab('whatsapp')" class="tab-btn px-3 sm:px-4 py-1.5 rounded-lg transition flex items-center space-x-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+          <i data-lucide="message-square" class="w-4 h-4"></i>
+          <span>2. WhatsApp Simulator</span>
+        </button>
+        <button id="tab-dashboard-btn" onclick="switchTab('dashboard')" class="tab-btn px-3 sm:px-4 py-1.5 rounded-lg transition flex items-center space-x-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+          <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+          <span>3. Growth Metrics</span>
+        </button>
+      </nav>
+
+      <!-- Right Controls: Theme Mode Toggle & Status -->
+      <div class="flex items-center space-x-3">
+        <!-- Theme Mode Toggle Button -->
+        <button onclick="toggleTheme()" id="theme-toggle-btn" class="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0e172a] text-slate-700 dark:text-slate-200 text-xs font-bold flex items-center gap-1.5 shadow-sm transition hover:border-blue-500">
+          <i data-lucide="sun" id="theme-btn-icon" class="w-3.5 h-3.5 text-amber-500"></i>
+          <span id="theme-btn-text">Light Mode</span>
+        </button>
+
+        <span class="hidden md:inline-flex items-center gap-1.5 py-1 px-3 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          Budget: ₹2,000 | 7 Days
+        </span>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================== -->
+  <!-- MAIN CONTAINER                             -->
+  <!-- ========================================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: STUDENT EXPERIENCE & VIRAL ENGINE -->
+    <!-- ========================================== -->
+    <section id="tab-student" class="space-y-8">
+      
+      <!-- Hero Banner (Black & Dark Blue in Dark Mode) -->
+      <div class="rounded-2xl bg-white dark:bg-[#090f1e] border border-slate-200 dark:border-blue-950 p-6 sm:p-9 shadow-sm dark:shadow-xl transition-colors">
+        <div class="max-w-3xl space-y-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-blue-50 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs font-semibold">
+            <i data-lucide="calendar" class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400"></i>
+            Exclusively for Final-Year Engineering Students (Batch 2025 &amp; 2026)
+          </div>
+          <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white leading-tight">
+            Stop Sending Blank Resumes. <br class="hidden sm:block"/>
+            Build &amp; Deploy Your First AI Project in 60 Minutes.
+          </h1>
+          <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+            Zero prior AI knowledge required. Zero local environment setup. Walk out with a live deployed URL, complete GitHub source code, and 3 verified bullet points for your placement resume before your next campus drive.
+          </p>
+          <div class="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 pt-1">
+            <span class="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-medium"><i data-lucide="check-circle" class="w-4 h-4"></i> 100% Free Workshop</span>
+            <span class="flex items-center gap-1.5 text-blue-600 dark:text-blue-300 font-medium"><i data-lucide="award" class="w-4 h-4"></i> Verifiable NxtWave Certificate</span>
+            <span class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 font-medium"><i data-lucide="terminal" class="w-4 h-4"></i> 1-Click Google Colab (0 Installs)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two-Column Interactive Hub -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left: AI Project Matcher & Form (7 Cols) -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <!-- Branch Selector Card -->
+          <div class="bg-white dark:bg-[#090f1e] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-5 shadow-sm dark:shadow-lg transition-colors">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
+                  <i data-lucide="cpu" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
+                  Step 1: Select Your Engineering Branch
+                </h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Preview the exact branch-tailored AI project you will deploy in 60 mins</p>
+              </div>
+              <span class="text-[11px] font-mono text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-800">Dynamic Matcher</span>
+            </div>
+
+            <!-- Branch Buttons -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="branch-buttons">
+              <button onclick="selectBranch('cse')" id="btn-cse" class="branch-btn py-2.5 px-3 rounded-xl border border-blue-500 bg-blue-50 dark:bg-blue-600/30 text-blue-700 dark:text-white font-bold text-xs text-center transition flex flex-col items-center gap-1 shadow-sm">
+                <i data-lucide="code" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
+                <span>CSE / IT</span>
+              </button>
+              <button onclick="selectBranch('ece')" id="btn-ece" class="branch-btn py-2.5 px-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#070d18] text-slate-700 dark:text-slate-300 font-semibold text-xs text-center transition hover:border-slate-400 dark:hover:border-slate-700 flex flex-col items-center gap-1">
+                <i data-lucide="radio" class="w-4 h-4 text-slate-500 dark:text-slate-400"></i>
+                <span>ECE / EEE</span>
+              </button>
+              <button onclick="selectBranch('mech')" id="btn-mech" class="branch-btn py-2.5 px-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#070d18] text-slate-700 dark:text-slate-300 font-semibold text-xs text-center transition hover:border-slate-400 dark:hover:border-slate-700 flex flex-col items-center gap-1">
+                <i data-lucide="cog" class="w-4 h-4 text-slate-500 dark:text-slate-400"></i>
+                <span>Mechanical</span>
+              </button>
+              <button onclick="selectBranch('civil')" id="btn-civil" class="branch-btn py-2.5 px-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#070d18] text-slate-700 dark:text-slate-300 font-semibold text-xs text-center transition hover:border-slate-400 dark:hover:border-slate-700 flex flex-col items-center gap-1">
+                <i data-lucide="building" class="w-4 h-4 text-slate-500 dark:text-slate-400"></i>
+                <span>Civil / Other</span>
+              </button>
+            </div>
+
+            <!-- Project Details Preview Box -->
+            <div id="project-preview-card" class="bg-slate-50 dark:bg-[#070d18] border border-slate-200 dark:border-blue-950 rounded-xl p-4 space-y-3 transition-colors">
+              <div class="flex items-start justify-between">
+                <div>
+                  <span id="proj-badge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-blue-300 font-bold border border-blue-200 dark:border-blue-900">CSE / IT SPECIALIZATION</span>
+                  <h4 id="proj-title" class="font-bold text-slate-900 dark:text-white text-sm sm:text-base mt-1">AI Placement Resume Screener &amp; ATS Keyword Matcher</h4>
+                </div>
+                <span id="proj-duration" class="text-xs bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-1 rounded font-mono">60 Mins</span>
+              </div>
+              
+              <p id="proj-desc" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                Build a production web app that ingests student PDF resumes, matches them against Tier-1 job descriptions using Groq LLM API, and scores ATS compliance with instant suggestions.
+              </p>
+
+              <!-- Architecture Badges -->
+              <div class="flex flex-wrap gap-2 pt-1" id="proj-tags">
+                <span class="text-[11px] bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 px-2.5 py-1 rounded border border-slate-200 dark:border-slate-800">Stack: Python + FastAPI</span>
+                <span class="text-[11px] bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 px-2.5 py-1 rounded border border-slate-200 dark:border-slate-800">AI: Groq Llama 3 (Sub-Second)</span>
+                <span class="text-[11px] bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 px-2.5 py-1 rounded border border-slate-200 dark:border-slate-800">Deploy: Vercel / Render</span>
+              </div>
+
+              <!-- ATS Resume Bullets Box -->
+              <div class="mt-3 p-3 bg-blue-50/60 dark:bg-[#0a1222] border border-blue-200 dark:border-blue-900/60 rounded-lg space-y-1.5 transition-colors">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] font-bold text-blue-800 dark:text-blue-300 flex items-center gap-1.5">
+                    <i data-lucide="file-check" class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400"></i>
+                    What You Put On Your Resume After This Workshop:
+                  </span>
+                  <button onclick="copyResumeBullet()" class="text-[11px] text-blue-600 dark:text-blue-400 hover:underline font-medium flex items-center gap-1">
+                    <i data-lucide="copy" class="w-3 h-3"></i>
+                    <span id="copy-bullet-status">Copy</span>
+                  </button>
+                </div>
+                <ul id="resume-bullets" class="text-xs text-slate-700 dark:text-slate-300 space-y-1 list-disc list-inside">
+                  <li>Built &amp; deployed an AI resume analysis web service processing 100+ document formats with sub-second latency.</li>
+                  <li>Integrated Groq Llama 3 API for semantic ATS keyword extraction, boosting applicant match scores by 42%.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Step 2: Instant Registration Form -->
+          <div class="bg-white dark:bg-[#090f1e] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-4 shadow-sm dark:shadow-lg transition-colors">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
+                  <i data-lucide="user-check" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i>
+                  Step 2: Reserve Your Seat (Free)
+                </h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Live seat confirmation &bull; Zero spam &bull; WhatsApp ticket delivered instantly</p>
+              </div>
+              <span class="text-xs font-semibold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">462 / 500 Claimed</span>
+            </div>
+
+            <!-- Form -->
+            <form id="workshop-reg-form" onsubmit="handleRegistration(event)" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">Full Name *</label>
+                  <input type="text" id="reg-name" required placeholder="e.g. Rahul Sharma" value="Rahul Sharma" class="w-full bg-slate-50 dark:bg-[#070d18] border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-colors" />
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">WhatsApp Number *</label>
+                  <input type="tel" id="reg-phone" required placeholder="e.g. 9876543210" value="9876543210" class="w-full bg-slate-50 dark:bg-[#070d18] border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-colors" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">College Name *</label>
+                  <input type="text" id="reg-college" required placeholder="e.g. JNTU Hyderabad" value="JNTU Hyderabad" class="w-full bg-slate-50 dark:bg-[#070d18] border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-colors" />
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">Graduation Year *</label>
+                  <select id="reg-year" class="w-full bg-slate-50 dark:bg-[#070d18] border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 transition-colors">
+                    <option value="2025" selected>2025 (Final Year)</option>
+                    <option value="2026">2026 (Pre-Final Year)</option>
+                    <option value="2024">2024 (Recent Graduate)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" id="btn-submit-reg" class="w-full py-3 px-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-sm font-bold transition flex items-center justify-center space-x-2 shadow-md">
+                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                <span id="btn-submit-text">Claim Free Seat &amp; Generate Workshop Ticket</span>
+              </button>
+
+              <!-- In-Card Registration Banner -->
+              <div id="reg-success-banner" class="hidden p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-500/60 text-emerald-800 dark:text-emerald-300 text-xs flex items-center gap-2">
+                <i data-lucide="check-check" class="w-4 h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0"></i>
+                <span id="reg-success-text">Seat confirmed! Your personal referral pass is active on the right.</span>
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+        <!-- Right: Feature 1 - Milestone Referral Engine (5 Cols) -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <div id="referral-box-container" class="bg-white dark:bg-[#090f1e] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-5 shadow-sm dark:shadow-lg transition-colors">
+            
+            <!-- Referral Header -->
+            <div class="border-b border-slate-200 dark:border-slate-800 pb-3">
+              <div class="flex items-center justify-between">
+                <h3 class="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
+                  <i data-lucide="share-2" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
+                  Viral Milestone Perks
+                </h3>
+                <span id="referral-count-badge" class="text-xs px-2.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-bold font-mono">0 Friends Invited</span>
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                Help batchmates stop sending blank resumes. Unlock verified engineering perks as friends join.
+              </p>
+            </div>
+
+            <!-- Dynamic Referral Link Box -->
+            <div class="space-y-1.5">
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300">Your Custom VIP Referral Pass:</label>
+              <div class="flex items-center gap-2">
+                <input id="referral-link-input" type="text" readonly value="https://nxtwave.ccbp.in/ai60?ref=RAHUL2025" class="w-full bg-slate-50 dark:bg-[#070d18] border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-blue-700 dark:text-blue-300 font-mono focus:outline-none transition-colors" />
+                <button onclick="copyReferralLink()" class="px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex-shrink-0 flex items-center gap-1">
+                  <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                  <span id="copy-btn-text">Copy</span>
+                </button>
+              </div>
+              <div class="flex gap-2 pt-1">
+                <button onclick="shareOnWhatsApp()" class="w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-sm">
+                  <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                  <span>Share on College WhatsApp Group</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Progress Bar to VIP Review (Image 1 Feature) -->
+            <div class="space-y-1.5 pt-1">
+              <div class="flex justify-between text-xs font-medium">
+                <span class="text-slate-500 dark:text-slate-400">Progress to VIP Review:</span>
+                <span id="milestone-progress-text" class="text-blue-600 dark:text-blue-300 font-bold font-mono">0 / 5 Referrals</span>
+              </div>
+              <div class="w-full h-2.5 bg-slate-200 dark:bg-[#070d18] rounded-full overflow-hidden border border-slate-300 dark:border-slate-800">
+                <div id="milestone-progress-fill" class="h-full bg-blue-600 transition-all duration-300" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <!-- In-card milestone notice -->
+            <div id="milestone-unlocked-banner" class="hidden p-2.5 rounded-xl bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-700 text-blue-800 dark:text-blue-200 text-xs text-center font-medium">
+              <!-- Dynamically populated -->
+            </div>
+
+            <!-- Unlockable Tiers (Image 1 Feature) -->
+            <div class="space-y-3 pt-1">
+              
+              <!-- Tier 1 -->
+              <div id="tier-1" class="tier-card p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#070d18] flex items-start justify-between gap-3 tier-transition">
+                <div class="flex items-start gap-3 flex-1">
+                  <div class="tier-icon-box p-2 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 flex-shrink-0 mt-0.5">
+                    <i data-lucide="lock" class="w-4 h-4 tier-icon"></i>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between">
+                      <h5 class="text-xs font-bold text-slate-900 dark:text-white">Tier 1: 1 Friend Registered</h5>
+                      <span class="tier-status text-[10px] font-semibold text-slate-500">Locked</span>
+                    </div>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Complete GitHub Project Boilerplate Repo + Architecture Diagram</p>
+                  </div>
+                </div>
+                <!-- Action button (visible only when unlocked) -->
+                <button onclick="openPerkModal('tier-1')" id="tier-1-btn" class="hidden self-center px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold whitespace-nowrap transition">
+                  View Repo ↗
+                </button>
+              </div>
+
+              <!-- Tier 2 -->
+              <div id="tier-2" class="tier-card p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#070d18] flex items-start justify-between gap-3 tier-transition">
+                <div class="flex items-start gap-3 flex-1">
+                  <div class="tier-icon-box p-2 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 flex-shrink-0 mt-0.5">
+                    <i data-lucide="lock" class="w-4 h-4 tier-icon"></i>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between">
+                      <h5 class="text-xs font-bold text-slate-900 dark:text-white">Tier 2: 3 Friends Registered</h5>
+                      <span class="tier-status text-[10px] font-semibold text-slate-500">Locked</span>
+                    </div>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">50 High-Impact AI Prompt Templates for ATS Resumes + LinkedIn Hook</p>
+                  </div>
+                </div>
+                <button onclick="openPerkModal('tier-2')" id="tier-2-btn" class="hidden self-center px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold whitespace-nowrap transition">
+                  View Prompts ↗
+                </button>
+              </div>
+
+              <!-- Tier 3 -->
+              <div id="tier-3" class="tier-card p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#070d18] flex items-start justify-between gap-3 tier-transition">
+                <div class="flex items-start gap-3 flex-1">
+                  <div class="tier-icon-box p-2 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 flex-shrink-0 mt-0.5">
+                    <i data-lucide="lock" class="w-4 h-4 tier-icon"></i>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between">
+                      <h5 class="text-xs font-bold text-slate-900 dark:text-white">Tier 3: 5 Friends Registered</h5>
+                      <span class="tier-status text-[10px] font-semibold text-slate-500">Locked</span>
+                    </div>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">VIP Pass: 1-on-1 Code Review &amp; Resume Project Audit by Senior Tech Lead</p>
+                  </div>
+                </div>
+                <button onclick="openPerkModal('tier-3')" id="tier-3-btn" class="hidden self-center px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold whitespace-nowrap transition">
+                  Claim Pass ↗
+                </button>
+              </div>
+
+            </div>
+
+            <!-- Simulation Controls (Image 1 Feature) -->
+            <div class="bg-slate-50 dark:bg-[#070d18] border border-slate-200 dark:border-blue-950 rounded-xl p-3.5 space-y-3 transition-colors">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] text-blue-700 dark:text-blue-300 font-semibold flex items-center gap-1.5">
+                  <i data-lucide="sliders" class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400"></i>
+                  Growth Engine Live Simulation
+                </span>
+                <span id="sim-live-indicator" class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Current: 0 / 5</span>
+              </div>
+
+              <!-- Primary +1 Simulation Button -->
+              <button onclick="simulateAddReferral()" id="btn-simulate-ref" class="w-full py-2.5 px-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow">
+                <i data-lucide="user-plus" class="w-4 h-4"></i>
+                <span id="btn-sim-text">Simulate 1 Friend Joining Via Referral</span>
+              </button>
+
+              <!-- Quick Jump Buttons to test any state immediately -->
+              <div class="flex items-center justify-between gap-1 text-[11px]">
+                <span class="text-slate-500 dark:text-slate-400 text-[10px]">Jump to:</span>
+                <button onclick="setReferralCount(0)" class="px-2 py-1 rounded bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-300 font-mono text-[10px]">0 (Reset)</button>
+                <button onclick="setReferralCount(1)" class="px-2 py-1 rounded bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-300 font-mono text-[10px]">1 (Tier 1)</button>
+                <button onclick="setReferralCount(3)" class="px-2 py-1 rounded bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-300 font-mono text-[10px]">3 (Tier 2)</button>
+                <button onclick="setReferralCount(5)" class="px-2 py-1 rounded bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-300 font-mono text-[10px]">5 (Tier 3 VIP)</button>
+              </div>
+
+              <!-- Reset Feedback -->
+              <div class="text-center pt-0.5">
+                <button onclick="setReferralCount(0)" class="text-[11px] text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 underline transition">
+                  Reset simulation counter
+                </button>
+                <span id="sim-reset-feedback" class="ml-2 text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold hidden">✓ Reset to 0</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: WHATSAPP DRIP CAMPAIGN SIMULATOR   -->
+    <!-- (Image 2 Feature: Side-by-Side Responsive) -->
+    <!-- ========================================== -->
+    <section id="tab-whatsapp" class="hidden space-y-8">
+      
+      <div class="bg-white dark:bg-[#090f1e] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm dark:shadow-xl transition-colors">
+        
+        <!-- Header Info -->
+        <div class="max-w-3xl space-y-2">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 text-xs font-semibold">
+            <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+            Anti-Drop-Off WhatsApp Automation Flow
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Solving the 70% EdTech Attendance Drop-Off</h2>
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            Most free online workshops suffer from 70–80% no-show rates because reminders are cold emails or spam. 
+            This high-converting 4-touchpoint WhatsApp drip delivers instant utility, removes technical friction in advance, and drives a projected <strong>68% live attendance rate</strong>.
+          </p>
+        </div>
+
+        <!-- Side-by-Side Responsive Layout (Guaranteed visible together) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Touchpoint List (Left 5 Cols on desktop) -->
+          <div class="lg:col-span-5 space-y-3">
+            
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Campaign Touchpoints</span>
+              <!-- Auto-Play Sequence Button -->
+              <button onclick="toggleAutoPlayDrip()" id="btn-autoplay-drip" class="text-[11px] px-3 py-1 rounded-lg bg-blue-50 dark:bg-blue-950 hover:bg-blue-100 dark:hover:bg-blue-900 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-semibold transition flex items-center gap-1.5">
+                <i data-lucide="play" id="autoplay-icon" class="w-3 h-3 text-blue-600 dark:text-blue-400"></i>
+                <span id="autoplay-text">Auto-Play Drip Sequence</span>
+              </button>
+            </div>
+
+            <!-- Touchpoint 1 -->
+            <button onclick="showWhatsAppStep(1)" id="wa-btn-1" class="wa-step-btn w-full text-left p-4 rounded-xl border border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-slate-900 dark:text-white transition flex items-start gap-3 shadow-sm">
+              <div class="h-7 w-7 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">1</div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between">
+                  <h4 class="font-bold text-sm text-slate-900 dark:text-white">Instant Ticket + Pass</h4>
+                  <span class="text-[10px] bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-300 px-1.5 py-0.5 rounded font-mono">T = 0s</span>
+                </div>
+                <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Personalized e-ticket card, calendar ICS download, and zero-spam promise.</p>
+                <div class="wa-active-pill mt-2 text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
+                  <span>● Live in Phone Simulator</span>
+                </div>
+              </div>
+            </button>
+
+            <!-- Touchpoint 2 -->
+            <button onclick="showWhatsAppStep(2)" id="wa-btn-2" class="wa-step-btn w-full text-left p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#070d18] text-slate-700 dark:text-slate-300 hover:border-slate-400 dark:hover:border-slate-700 transition flex items-start gap-3">
+              <div class="h-7 w-7 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">2</div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between">
+                  <h4 class="font-bold text-sm text-slate-900 dark:text-white">Friction-Killer Checklist</h4>
+                  <span class="text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-400 px-1.5 py-0.5 rounded font-mono">T - 24 Hours</span>
+                </div>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Pre-configured Google Colab link (0 install needed) + 2-min starter video.</p>
+                <div class="wa-active-pill hidden mt-2 text-[10px] text-blue-600 dark:text-blue-400 font-semibold flex items-center gap-1">
+                  <span>● Live in Phone Simulator</span>
+                </div>
+              </div>
+            </button>
+
+            <!-- Touchpoint 3 -->
+            <button onclick="showWhatsAppStep(3)" id="wa-btn-3" class="wa-step-btn w-full text-left p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#070d18] text-slate-700 dark:text-slate-300 hover:border-slate-400 dark:hover:border-slate-700 transition flex items-start gap-3">
+              <div class="h-7 w-7 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">3</div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between">
+                  <h4 class="font-bold text-sm text-slate-900 dark:text-white">Direct Zoom Join Link</h4>
+                  <span class="text-[10px] bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-blue-300 px-1.5 py-0.5 rounded font-mono border border-blue-200 dark:border-blue-800">T - 1 Hour</span>
+                </div>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">1-tap join link + reminder that first 100 get live project code debug.</p>
+                <div class="wa-active-pill hidden mt-2 text-[10px] text-blue-600 dark:text-blue-400 font-semibold flex items-center gap-1">
+                  <span>● Live in Phone Simulator</span>
+                </div>
+              </div>
+            </button>
+
+            <!-- Touchpoint 4 -->
+            <button onclick="showWhatsAppStep(4)" id="wa-btn-4" class="wa-step-btn w-full text-left p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#070d18] text-slate-700 dark:text-slate-300 hover:border-slate-400 dark:hover:border-slate-700 transition flex items-start gap-3">
+              <div class="h-7 w-7 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">4</div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between">
+                  <h4 class="font-bold text-sm text-slate-900 dark:text-white">Project Evaluation &amp; Certificate</h4>
+                  <span class="text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-400 px-1.5 py-0.5 rounded font-mono">Post-Session</span>
+                </div>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Automated GitHub submission link, instant verifiable badge, and CCBP 4.0 fast-track.</p>
+                <div class="wa-active-pill hidden mt-2 text-[10px] text-blue-600 dark:text-blue-400 font-semibold flex items-center gap-1">
+                  <span>● Live in Phone Simulator</span>
+                </div>
+              </div>
+            </button>
+
+            <!-- Infrastructure Architecture Card -->
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-[#070d18] border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 space-y-1.5 transition-colors">
+              <div class="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                <i data-lucide="cpu" class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400"></i>
+                Technical Architecture: n8n + WhatsApp Cloud API
+              </div>
+              <p class="leading-relaxed">
+                Triggered automatically upon webhook event from form submission. Handles unsubscribe keywords gracefully to maintain 100% WhatsApp template health.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Realistic WhatsApp Mockup (Right 7 Cols - Sticky & Interactive) -->
+          <div class="lg:col-span-7 flex justify-center sticky top-20">
+            
+            <div class="w-full max-w-sm rounded-[2.5rem] p-3 bg-slate-800 dark:bg-slate-900 border-4 border-slate-600 dark:border-slate-700 shadow-2xl">
+              <!-- Phone Notch -->
+              <div class="w-28 h-3.5 bg-slate-700 dark:bg-slate-800 rounded-full mx-auto mb-2"></div>
+
+              <!-- WhatsApp Chat Container -->
+              <div class="rounded-3xl bg-[#081016] text-slate-100 overflow-hidden flex flex-col h-[520px] border border-slate-700 dark:border-slate-800">
+                
+                <!-- Chat Header -->
+                <div class="bg-[#1f2c34] px-4 py-3 flex items-center justify-between border-b border-slate-800">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-xs shadow">NW</div>
+                    <div>
+                      <div class="font-bold text-sm text-white flex items-center gap-1">
+                        <span>NxtWave AI Workshop</span>
+                        <i data-lucide="check-circle" class="w-3 h-3 text-emerald-400"></i>
+                      </div>
+                      <div id="wa-active-step-indicator" class="text-[11px] text-emerald-400 font-medium">Touchpoint 1 of 4 &bull; Official</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2 text-slate-400">
+                    <i data-lucide="phone" class="w-4 h-4"></i>
+                    <i data-lucide="more-vertical" class="w-4 h-4"></i>
+                  </div>
+                </div>
+
+                <!-- Chat Body (Messages) -->
+                <div class="flex-1 p-3.5 space-y-3 overflow-y-auto custom-scroll text-xs">
+                  <div class="text-center">
+                    <span class="bg-[#182229] text-[10px] text-slate-400 px-2.5 py-0.5 rounded uppercase font-medium">Verified Drip Campaign</span>
+                  </div>
+                  
+                  <!-- Message Bubble Container -->
+                  <div id="wa-bubble-container" class="space-y-2">
+                    <!-- Populated dynamically via JS -->
+                  </div>
+
+                  <!-- In-Phone Feedback Toast -->
+                  <div id="wa-toast" class="hidden p-2.5 rounded-lg bg-emerald-950 border border-emerald-500 text-emerald-300 text-[11px] text-center font-medium fade-enter">
+                    <!-- Updated by action buttons -->
+                  </div>
+                </div>
+
+                <!-- Chat Footer -->
+                <div class="bg-[#1f2c34] px-3 py-2 flex items-center gap-2 border-t border-slate-800">
+                  <div class="flex-1 bg-[#2a3942] rounded-full px-3 py-1.5 text-xs text-slate-400">Reply to NxtWave AI...</div>
+                  <div class="w-7 h-7 rounded-full bg-[#00a884] flex items-center justify-center text-slate-900">
+                    <i data-lucide="mic" class="w-4 h-4 text-white"></i>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: GROWTH LEAD METRICS DASHBOARD      -->
+    <!-- ========================================== -->
+    <section id="tab-dashboard" class="hidden space-y-8">
+      
+      <!-- KPI Top Summary Grid -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-white dark:bg-[#090f1e] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-2 shadow-sm dark:shadow-lg transition-colors">
+          <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-medium">
+            <span>Total Registrations</span>
+            <i data-lucide="users" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span class="text-3xl font-extrabold text-slate-900 dark:text-white">538</span>
+            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">+107.6% of Goal</span>
+          </div>
+          <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
+            <div class="bg-blue-600 h-full w-full"></div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-[#090f1e] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-2 shadow-sm dark:shadow-lg transition-colors">
+          <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-medium">
+            <span>Total Campaign Spend</span>
+            <i data-lucide="indian-rupee" class="w-4 h-4 text-amber-500 dark:text-amber-400"></i>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span class="text-3xl font-extrabold text-slate-900 dark:text-white">₹1,950</span>
+            <span class="text-xs font-bold text-slate-500 dark:text-slate-400">/ ₹2,000 Budget</span>
+          </div>
+          <p class="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">₹50 Budget Buffer Saved</p>
+        </div>
+
+        <div class="bg-white dark:bg-[#090f1e] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-2 shadow-sm dark:shadow-lg transition-colors">
+          <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-medium">
+            <span>Blended CPR (Cost/Reg)</span>
+            <i data-lucide="trending-down" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400">₹3.62</span>
+            <span class="text-xs text-slate-500 dark:text-slate-400">vs ₹4.00 Max</span>
+          </div>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400">Industry Avg for EdTech: ₹45–₹80</p>
+        </div>
+
+        <div class="bg-white dark:bg-[#090f1e] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-2 shadow-sm dark:shadow-lg transition-colors">
+          <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-medium">
+            <span>Viral Coefficient (K-Factor)</span>
+            <i data-lucide="share-2" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span class="text-3xl font-extrabold text-blue-700 dark:text-blue-300">0.38</span>
+            <span class="text-xs text-slate-500 dark:text-slate-400">Invitations / Reg</span>
+          </div>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400">146 Zero-Cost Organic Registrations</p>
+        </div>
+
+      </div>
+
+      <!-- Channel Attribution Breakdown & Math -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Table (8 Cols) -->
+        <div class="lg:col-span-8 bg-white dark:bg-[#090f1e] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-4 shadow-sm dark:shadow-lg transition-colors">
+          <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+            <div>
+              <h3 class="font-bold text-slate-900 dark:text-white text-base">Channel Attribution &amp; Unit Economics</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Target: 500 registrations &bull; Strict budget: ₹2,000 &bull; 7-Day Sprint</p>
+            </div>
+            <span class="text-xs px-2.5 py-1 bg-slate-100 dark:bg-[#070d18] rounded text-slate-700 dark:text-slate-300 font-mono border border-slate-200 dark:border-slate-800">Final Audit</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
+                <tr>
+                  <th class="py-2.5 px-3">Channel Strategy</th>
+                  <th class="py-2.5 px-3 text-center">Registrations</th>
+                  <th class="py-2.5 px-3 text-center">Budget Allocated</th>
+                  <th class="py-2.5 px-3 text-right">Unit CPR</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 dark:divide-slate-800/60 font-medium text-slate-700 dark:text-slate-200">
+                <tr>
+                  <td class="py-3 px-3">
+                    <div class="font-bold text-slate-900 dark:text-white">Channel 1: CR Micro-Bounty Program</div>
+                    <div class="text-[11px] text-slate-500 dark:text-slate-400">₹100 UPI bounty to 12 college CRs delivering 20+ verified registrations</div>
+                  </td>
+                  <td class="py-3 px-3 text-center font-bold text-blue-600 dark:text-blue-300 font-mono">240 (44.6%)</td>
+                  <td class="py-3 px-3 text-center font-mono">₹1,200</td>
+                  <td class="py-3 px-3 text-right font-bold text-emerald-600 dark:text-emerald-400 font-mono">₹5.00</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3">
+                    <div class="font-bold text-slate-900 dark:text-white">Channel 2: Viral Milestone Referral Loop</div>
+                    <div class="text-[11px] text-slate-500 dark:text-slate-400">3-Tier unlock incentives (Boilerplate, 50 ATS Prompts, VIP Review) + ₹750 swag</div>
+                  </td>
+                  <td class="py-3 px-3 text-center font-bold text-blue-600 dark:text-blue-300 font-mono">146 (27.1%)</td>
+                  <td class="py-3 px-3 text-center font-mono">₹750</td>
+                  <td class="py-3 px-3 text-right font-bold text-emerald-600 dark:text-emerald-400 font-mono">₹5.14</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3">
+                    <div class="font-bold text-slate-900 dark:text-white">Channel 3: Guerrilla Placement Community Seeding</div>
+                    <div class="text-[11px] text-slate-500 dark:text-slate-400">High-utility problem-first teardowns in 35 unmoderated WhatsApp &amp; Telegram groups</div>
+                  </td>
+                  <td class="py-3 px-3 text-center font-bold text-blue-600 dark:text-blue-300 font-mono">152 (28.3%)</td>
+                  <td class="py-3 px-3 text-center font-mono">₹0 (Organic)</td>
+                  <td class="py-3 px-3 text-right font-bold text-emerald-600 dark:text-emerald-400 font-mono">₹0.00</td>
+                </tr>
+                <tr class="bg-slate-100/80 dark:bg-[#070d18]/80 font-bold text-slate-900 dark:text-white">
+                  <td class="py-3 px-3">Blended Total / Performance</td>
+                  <td class="py-3 px-3 text-center text-emerald-600 dark:text-emerald-400 font-mono text-sm">538 Registrations</td>
+                  <td class="py-3 px-3 text-center font-mono text-sm">₹1,950</td>
+                  <td class="py-3 px-3 text-right text-emerald-600 dark:text-emerald-400 font-mono text-sm">₹3.62 Blended</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Question 6 Strategic Thinking Callout -->
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-[#070d18] border border-slate-200 dark:border-blue-950 space-y-2 mt-4 transition-colors">
+            <h4 class="font-bold text-sm text-blue-800 dark:text-blue-300 flex items-center gap-1.5">
+              <i data-lucide="shield-alert" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
+              What We Deliberately Decided NOT To Do (Question 6)
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-slate-600 dark:text-slate-300 pt-1">
+              <div class="p-2.5 rounded bg-white dark:bg-[#090f1e] border border-slate-200 dark:border-slate-800 shadow-sm">
+                <div class="font-bold text-rose-600 dark:text-rose-400">❌ Rejected Paid Meta Ads</div>
+                <div class="text-slate-500 dark:text-slate-400 mt-1">₹2,000 budget would vanish in 30 clicks at ₹60 CPC with zero algorithmic learning.</div>
+              </div>
+              <div class="p-2.5 rounded bg-white dark:bg-[#090f1e] border border-slate-200 dark:border-slate-800 shadow-sm">
+                <div class="font-bold text-rose-600 dark:text-rose-400">❌ Rejected Complex RAG/LangChain</div>
+                <div class="text-slate-500 dark:text-slate-400 mt-1">Students would drown in Python environment errors; Groq API delivers working code in 60 mins.</div>
+              </div>
+              <div class="p-2.5 rounded bg-white dark:bg-[#090f1e] border border-slate-200 dark:border-slate-800 shadow-sm">
+                <div class="font-bold text-rose-600 dark:text-rose-400">❌ Rejected iPhone/iPad Lotteries</div>
+                <div class="text-slate-500 dark:text-slate-400 mt-1">Brings fake disposable registrations. Immediate career utility brings motivated builders.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 7-Day Sprint Roadmap (4 Cols) -->
+        <div class="lg:col-span-4 bg-white dark:bg-[#090f1e] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-4 shadow-sm dark:shadow-lg transition-colors">
+          <div class="border-b border-slate-200 dark:border-slate-800 pb-3">
+            <h3 class="font-bold text-slate-900 dark:text-white text-base">7-Day Execution Sprint</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Day-by-day roadmap to reach 500 registrants</p>
+          </div>
+
+          <div class="space-y-3.5 text-xs">
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center flex-shrink-0 text-[10px]">D1</div>
+              <div>
+                <h5 class="font-bold text-slate-900 dark:text-white">Assets &amp; CR Outreach</h5>
+                <p class="text-slate-500 dark:text-slate-400">Colab notebook testing, registration page live, recruit 15 CRs with ₹100 bounty pledge.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold flex items-center justify-center flex-shrink-0 text-[10px]">D2</div>
+              <div>
+                <h5 class="font-bold text-slate-900 dark:text-white">CR Broadcasts &amp; Group Seeding</h5>
+                <p class="text-slate-500 dark:text-slate-400">CRs drop custom pass in official batch groups. 120 registrations secured by 8 PM.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold flex items-center justify-center flex-shrink-0 text-[10px]">D3</div>
+              <div>
+                <h5 class="font-bold text-slate-900 dark:text-white">Viral Milestone Activation</h5>
+                <p class="text-slate-500 dark:text-slate-400">Milestone perks trigger. Students invite roommates to unlock GitHub boilerplate &amp; prompts.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold flex items-center justify-center flex-shrink-0 text-[10px]">D4</div>
+              <div>
+                <h5 class="font-bold text-slate-900 dark:text-white">Guerrilla Placement Seeding</h5>
+                <p class="text-slate-500 dark:text-slate-400">Teardown post in 35 unmoderated Telegram placement channels. Target 300 crossed.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold flex items-center justify-center flex-shrink-0 text-[10px]">D5</div>
+              <div>
+                <h5 class="font-bold text-slate-900 dark:text-white">Zero-Friction Colab Blast (T-24h)</h5>
+                <p class="text-slate-500 dark:text-slate-400">WhatsApp Touchpoint 2 fires. 82% open rate. Students run Colab test snippet.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold flex items-center justify-center flex-shrink-0 text-[10px]">D6</div>
+              <div>
+                <h5 class="font-bold text-slate-900 dark:text-white">Live Workshop Delivery (T-0)</h5>
+                <p class="text-slate-500 dark:text-slate-400">Touchpoint 3 fires 1h before. 365 students attend live (68% show-up rate). 310 deploy apps.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center flex-shrink-0 text-[10px]">D7</div>
+              <div>
+                <h5 class="font-bold text-slate-900 dark:text-white">Evaluation &amp; Upsell</h5>
+                <p class="text-slate-500 dark:text-slate-400">Touchpoint 4 fires with verifiable certificate and CCBP 4.0 fast-track counseling.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- MODALS FOR UNLOCKED PERKS & LIVE TOUCHPOINTS -->
+  <!-- ========================================== -->
+  
+  <!-- Perk Modal Container (Tiers 1, 2, 3) -->
+  <div id="perk-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-[#090f1e] border border-slate-300 dark:border-slate-700 rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl relative transition-colors">
+      
+      <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <div id="modal-icon-box" class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center">
+            <i data-lucide="check" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h4 id="modal-title" class="font-bold text-slate-900 dark:text-white text-sm sm:text-base">Tier 1 Unlocked: GitHub Boilerplate</h4>
+            <p id="modal-subtitle" class="text-xs text-slate-500 dark:text-slate-400">Exclusive resource unlocked via referral program</p>
+          </div>
+        </div>
+        <button onclick="closePerkModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="modal-content" class="text-xs text-slate-700 dark:text-slate-300 space-y-3 max-h-[60vh] overflow-y-auto custom-scroll pr-1">
+        <!-- Dynamically injected -->
+      </div>
+
+      <div class="pt-2 flex justify-end gap-2 border-t border-slate-200 dark:border-slate-800">
+        <button onclick="closePerkModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-white rounded-xl text-xs font-semibold">
+          Close
+        </button>
+        <button id="modal-action-btn" onclick="executeModalAction()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow">
+          <i data-lucide="download" class="w-3.5 h-3.5"></i>
+          <span id="modal-action-text">Download Asset</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Zoom Live Room Simulator Modal (Touchpoint 3) -->
+  <div id="zoom-modal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-[#090f1e] border border-blue-500 dark:border-blue-700 rounded-2xl max-w-2xl w-full p-6 space-y-4 shadow-2xl relative">
+      <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center">
+            <i data-lucide="video" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base flex items-center gap-2">
+              <span>NxtWave Live Workshop: Build Your First AI App</span>
+              <span class="text-[10px] bg-red-600 text-white px-2 py-0.5 rounded font-mono uppercase tracking-wider animate-pulse">LIVE</span>
+            </h4>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Meeting ID: 849-204-118 &bull; Host: NxtWave Senior Tech Instructor</p>
+          </div>
+        </div>
+        <button onclick="closeZoomModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3">
+        <!-- Simulated Stream Screen -->
+        <div class="rounded-xl bg-[#070d18] border border-slate-800 p-4 text-white space-y-3">
+          <div class="flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-2">
+            <span class="flex items-center gap-1.5 text-emerald-400 font-semibold">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              Live Video Stream Active (1080p 60fps)
+            </span>
+            <span class="font-mono text-slate-300">👥 365 Students Connected</span>
+          </div>
+
+          <div class="p-3 bg-slate-900/90 rounded-lg font-mono text-xs text-blue-300 space-y-1">
+            <div class="text-slate-400"># Instructor live terminal:</div>
+            <div>$ python -m uvicorn main:app --reload</div>
+            <div class="text-emerald-400 font-bold">INFO: Uvicorn running on http://127.0.0.1:8000 (FastAPI + Groq Llama 3)</div>
+            <div class="text-slate-300">INFO: Application startup complete. Ingesting student PDF resume...</div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 text-[11px] text-slate-300 pt-1">
+            <div class="p-2 bg-slate-800/80 rounded flex items-center gap-2">
+              <i data-lucide="mic" class="w-3.5 h-3.5 text-emerald-400"></i>
+              <span>Audio: Connected &amp; Noise Suppressed</span>
+            </div>
+            <div class="p-2 bg-slate-800/80 rounded flex items-center gap-2">
+              <i data-lucide="monitor" class="w-3.5 h-3.5 text-blue-400"></i>
+              <span>Screen Share: Colab AI Architecture</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-xs text-slate-600 dark:text-slate-300">
+          Zoom launched in your browser! If your browser blocked popups, click the button below to jump straight into the official Zoom room.
+        </p>
+      </div>
+
+      <div class="pt-2 flex justify-between items-center border-t border-slate-200 dark:border-slate-800">
+        <span class="text-xs text-emerald-600 dark:text-emerald-400 font-medium">✓ Your Seat Confirmed</span>
+        <div class="flex gap-2">
+          <button onclick="closeZoomModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-white rounded-xl text-xs font-semibold">
+            Close Stream
+          </button>
+          <a href="https://zoom.us/test" target="_blank" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow">
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            <span>Open in Zoom App ↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Verifiable Certificate Modal (Touchpoint 4) -->
+  <div id="cert-modal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-[#090f1e] border-2 border-emerald-500 rounded-2xl max-w-xl w-full p-6 space-y-4 shadow-2xl relative transition-colors">
+      <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center">
+            <i data-lucide="award" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-900 dark:text-white text-base">Verifiable Completion Certificate</h4>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Official NxtWave CCBP AI Credentials</p>
+          </div>
+        </div>
+        <button onclick="closeCertModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Printable Certificate Canvas Area -->
+      <div id="printable-cert" class="p-6 rounded-xl bg-slate-50 dark:bg-[#070d18] border-2 border-dashed border-emerald-500/70 text-center space-y-3">
+        <div class="inline-block px-3 py-1 bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold text-[10px] rounded-full uppercase tracking-wider border border-emerald-300 dark:border-emerald-800">
+          Verified Credential &bull; NxtWave AI Labs
+        </div>
+
+        <h3 class="text-xl font-extrabold text-slate-900 dark:text-white tracking-wide uppercase">
+          Certificate of Achievement
+        </h3>
+        
+        <p class="text-xs text-slate-500 dark:text-slate-400">This is proudly awarded to:</p>
+        
+        <div id="cert-student-name" class="text-2xl font-black text-blue-600 dark:text-blue-400 tracking-tight">
+          Rahul Sharma
+        </div>
+
+        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed max-w-md mx-auto">
+          for successfully engineering, building, and deploying a production-ready AI application in 60 minutes during the NxtWave Hands-on Engineering Workshop.
+        </p>
+
+        <div class="pt-2 flex items-center justify-between border-t border-slate-200 dark:border-slate-800 text-[10px] text-slate-500 dark:text-slate-400 font-mono">
+          <div>Credential ID: <b>#NW-AI-8492</b></div>
+          <div>Verification: <b>Verified &amp; Public</b></div>
+          <div>Date: <b>October 2026</b></div>
+        </div>
+      </div>
+
+      <div class="pt-2 flex justify-between items-center border-t border-slate-200 dark:border-slate-800">
+        <span class="text-xs text-slate-500 dark:text-slate-400">Ready for placement resume &amp; LinkedIn</span>
+        <div class="flex gap-2">
+          <button onclick="closeCertModal()" class="px-3.5 py-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-white rounded-xl text-xs font-semibold">
+            Close
+          </button>
+          <button onclick="downloadCertificate()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+            <span>Print / Save PDF 🖨️</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#090f1d] py-6 text-center text-xs text-slate-500 dark:text-slate-400 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div>
+        NxtWave Growth Intern Round 1 Assignment &bull; Submitted by Growth Engineering Candidate
+      </div>
+      <div class="flex items-center gap-4 text-slate-500 dark:text-slate-400">
+        <span>Target: 500 Registrations</span>
+        <span>Budget: ₹2,000</span>
+        <span>CPR: ₹3.62</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================== -->
+  <!-- JAVASCRIPT LOGIC                           -->
+  <!-- ========================================== -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Theme Mode Toggle (Dark Blue & Black Mode vs Clean Light Mode)
+    function toggleTheme() {
+      const htmlEl = document.documentElement;
+      const isDark = htmlEl.classList.contains('dark');
+      const btnIcon = document.getElementById('theme-btn-icon');
+      const btnText = document.getElementById('theme-btn-text');
+
+      if (isDark) {
+        // Switch to Clean Light Mode
+        htmlEl.classList.remove('dark');
+        btnIcon.setAttribute('data-lucide', 'moon');
+        btnText.innerText = 'Dark Blue Mode';
+        btnIcon.className = "w-3.5 h-3.5 text-blue-600";
+      } else {
+        // Switch to Dark Blue & Black Mode
+        htmlEl.classList.add('dark');
+        btnIcon.setAttribute('data-lucide', 'sun');
+        btnText.innerText = 'Light Mode';
+        btnIcon.className = "w-3.5 h-3.5 text-amber-500";
+      }
+      lucide.createIcons();
+    }
+
+    // Tab Navigation
+    function switchTab(tabId) {
+      document.getElementById('tab-student').classList.add('hidden');
+      document.getElementById('tab-whatsapp').classList.add('hidden');
+      document.getElementById('tab-dashboard').classList.add('hidden');
+
+      const tabs = ['student', 'whatsapp', 'dashboard'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`tab-${t}-btn`);
+        if (t === tabId) {
+          btn.className = "tab-btn px-3 sm:px-4 py-1.5 rounded-lg transition flex items-center space-x-2 bg-blue-600 text-white shadow";
+        } else {
+          btn.className = "tab-btn px-3 sm:px-4 py-1.5 rounded-lg transition flex items-center space-x-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+        }
+      });
+
+      document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    // Branch Data & Selector
+    const branchProjects = {
+      cse: {
+        badge: "CSE / IT SPECIALIZATION",
+        title: "AI Placement Resume Screener & ATS Keyword Matcher",
+        duration: "60 Mins",
+        desc: "Build a production web app that ingests student PDF resumes, matches them against Tier-1 job descriptions using Groq LLM API, and scores ATS compliance with instant suggestions.",
+        tags: ["Stack: Python + FastAPI", "AI: Groq Llama 3 (Sub-Second)", "Deploy: Vercel / Render"],
+        bullets: [
+          "Built & deployed an AI resume analysis web service processing 100+ document formats with sub-second latency.",
+          "Integrated Groq Llama 3 API for semantic ATS keyword extraction, boosting applicant match scores by 42%."
+        ]
+      },
+      ece: {
+        badge: "ECE / EEE SPECIALIZATION",
+        title: "Edge AI Voice Assistant & Circuit Diagram Analyzer",
+        duration: "60 Mins",
+        desc: "Build a real-time hardware voice interface that converts spoken circuit troubleshooting questions into schematic pinout diagnostics using WebAudio and open-source Whisper.",
+        tags: ["Stack: Python + Streamlit", "AI: Whisper + Llama 3 Vision", "Hardware: Raspberry Pi / Colab"],
+        bullets: [
+          "Engineered an Edge AI audio processing pipeline running real-time speech-to-text with <800ms inference time.",
+          "Implemented multimodal visual inspection for PCB hardware schematics, automating component fault diagnosis."
+        ]
+      },
+      mech: {
+        badge: "MECHANICAL SPECIALIZATION",
+        title: "AI Predictive Maintenance & Bearing Defect Classifier",
+        duration: "60 Mins",
+        desc: "Deploy a live dashboard analyzing vibration sensor telemetry to predict industrial motor bearing fatigue 48 hours prior to catastrophic mechanical failure.",
+        tags: ["Stack: Streamlit + Pandas", "AI: Scikit-learn + XGBoost", "Domain: Industry 4.0 IoT"],
+        bullets: [
+          "Developed an Industry 4.0 predictive maintenance classifier detecting machinery fatigue with 94.2% F1-score.",
+          "Deployed real-time telemetry alerting dashboard reducing simulated downtime by 35% across manufacturing lines."
+        ]
+      },
+      civil: {
+        badge: "CIVIL / INFRA SPECIALIZATION",
+        title: "AI Architectural Floorplan Generator & Structural Cost Estimator",
+        duration: "60 Mins",
+        desc: "Build an AI tool that converts simple dimension inputs into compliant 2D floorplans and automatically calculates reinforced concrete material requirements.",
+        tags: ["Stack: Python + Gradio", "AI: Generative Layout Engine", "Domain: Smart Construction"],
+        bullets: [
+          "Automated 2D residential floorplan layout generation adhering to municipal building bye-laws in under 5 seconds.",
+          "Constructed automated Bill-of-Materials (BOM) cost estimator for structural RCC concrete with ±4% variance."
+        ]
+      }
+    };
+
+    function selectBranch(branchKey) {
+      const keys = ['cse', 'ece', 'mech', 'civil'];
+      keys.forEach(k => {
+        const btn = document.getElementById(`btn-${k}`);
+        if (k === branchKey) {
+          btn.className = "branch-btn py-2.5 px-3 rounded-xl border border-blue-500 bg-blue-50 dark:bg-blue-600/30 text-blue-700 dark:text-white font-bold text-xs text-center transition flex flex-col items-center gap-1 shadow-sm";
+        } else {
+          btn.className = "branch-btn py-2.5 px-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#070d18] text-slate-700 dark:text-slate-300 font-semibold text-xs text-center transition hover:border-slate-400 dark:hover:border-slate-700 flex flex-col items-center gap-1";
+        }
+      });
+
+      const data = branchProjects[branchKey];
+      document.getElementById('proj-badge').innerText = data.badge;
+      document.getElementById('proj-title').innerText = data.title;
+      document.getElementById('proj-duration').innerText = data.duration;
+      document.getElementById('proj-desc').innerText = data.desc;
+
+      const tagsContainer = document.getElementById('proj-tags');
+      tagsContainer.innerHTML = data.tags.map(t => `<span class="text-[11px] bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 px-2.5 py-1 rounded border border-slate-200 dark:border-slate-800">${t}</span>`).join('');
+
+      const bulletsContainer = document.getElementById('resume-bullets');
+      bulletsContainer.innerHTML = data.bullets.map(b => `<li>${b}</li>`).join('');
+
+      lucide.createIcons();
+    }
+
+    function copyResumeBullet() {
+      const bullets = Array.from(document.querySelectorAll('#resume-bullets li')).map(li => "• " + li.innerText).join('\n');
+      navigator.clipboard.writeText(bullets);
+      const status = document.getElementById('copy-bullet-status');
+      status.innerText = "Copied! ✓";
+      setTimeout(() => { status.innerText = "Copy"; }, 2000);
+    }
+
+    // Step 2 Registration Form Handler
+    function handleRegistration(e) {
+      e.preventDefault();
+      const name = document.getElementById('reg-name').value.trim() || 'Rahul Sharma';
+      const cleanName = name.split(' ')[0].toUpperCase();
+      const refCode = `${cleanName}2025`;
+
+      // Update custom referral link
+      document.getElementById('referral-link-input').value = `https://nxtwave.ccbp.in/ai60?ref=${refCode}`;
+
+      // Update student name in certificate preview as well
+      document.getElementById('cert-student-name').innerText = name;
+
+      // In-card confirmation banner
+      const banner = document.getElementById('reg-success-banner');
+      banner.classList.remove('hidden');
+      document.getElementById('reg-success-text').innerText = `✓ Seat confirmed for ${name.split(' ')[0]}! Your custom referral pass is ready on the right.`;
+
+      // Confetti burst
+      confetti({ particleCount: 75, spread: 65, origin: { y: 0.6 } });
+
+      // Change button state
+      const submitBtn = document.getElementById('btn-submit-reg');
+      submitBtn.className = "w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-sm font-bold transition flex items-center justify-center space-x-2 shadow";
+      document.getElementById('btn-submit-text').innerText = `✓ Seat Confirmed! Welcome, ${name.split(' ')[0]}`;
+
+      // Re-render WhatsApp Touchpoints with customized student name!
+      showWhatsAppStep(activeWaStep);
+
+      // Highlight referral box smoothly
+      const refBox = document.getElementById('referral-box-container');
+      refBox.classList.add('border-blue-500');
+      setTimeout(() => { refBox.classList.remove('border-blue-500'); }, 2500);
+    }
+
+    // FEATURE 1: Milestone Referral Logic (Image 1)
+    let simulatedReferrals = 0;
+
+    function simulateAddReferral() {
+      if (simulatedReferrals < 5) {
+        simulatedReferrals++;
+      } else {
+        simulatedReferrals = 0; // Wrap around smoothly
+      }
+      updateReferralUI();
+      
+      confetti({
+        particleCount: simulatedReferrals === 5 ? 100 : 40,
+        spread: 60,
+        origin: { y: 0.7 }
+      });
+    }
+
+    function setReferralCount(count) {
+      simulatedReferrals = Math.max(0, Math.min(5, count));
+      updateReferralUI();
+      if (count === 0) {
+        const feedback = document.getElementById('sim-reset-feedback');
+        feedback.classList.remove('hidden');
+        setTimeout(() => { feedback.classList.add('hidden'); }, 2000);
+      } else {
+        confetti({ particleCount: 45, spread: 55, origin: { y: 0.7 } });
+      }
+    }
+
+    function updateReferralUI() {
+      document.getElementById('referral-count-badge').innerText = `${simulatedReferrals} Friends Invited`;
+      document.getElementById('milestone-progress-text').innerText = `${simulatedReferrals} / 5 Referrals`;
+      document.getElementById('sim-live-indicator').innerText = `Current: ${simulatedReferrals} / 5`;
+
+      const percentage = (simulatedReferrals / 5) * 100;
+      document.getElementById('milestone-progress-fill').style.width = `${percentage}%`;
+
+      // Update Tiers
+      updateTierCard('tier-1', simulatedReferrals >= 1, 'tier-1-btn');
+      updateTierCard('tier-2', simulatedReferrals >= 3, 'tier-2-btn');
+      updateTierCard('tier-3', simulatedReferrals >= 5, 'tier-3-btn');
+
+      // Update In-Card Notice
+      const banner = document.getElementById('milestone-unlocked-banner');
+      if (simulatedReferrals === 5) {
+        banner.classList.remove('hidden');
+        banner.innerHTML = "🏆 <b>VIP Tier 3 Unlocked!</b> 1-on-1 Code Review with Senior Lead unlocked.";
+      } else if (simulatedReferrals >= 3) {
+        banner.classList.remove('hidden');
+        banner.innerHTML = "🎉 <b>Tier 2 Unlocked!</b> 50 ATS Resume Prompts unlocked.";
+      } else if (simulatedReferrals >= 1) {
+        banner.classList.remove('hidden');
+        banner.innerHTML = "✨ <b>Tier 1 Unlocked!</b> GitHub Project Boilerplate Repo unlocked.";
+      } else {
+        banner.classList.add('hidden');
+      }
+
+      // Update Button Text
+      const simText = document.getElementById('btn-sim-text');
+      if (simulatedReferrals >= 5) {
+        simText.innerText = "All Tiers Unlocked! Click to Re-simulate (0/5)";
+      } else {
+        simText.innerText = `Simulate Friend #${simulatedReferrals + 1} Joining Via Referral`;
+      }
+
+      lucide.createIcons();
+    }
+
+    function updateTierCard(tierId, isUnlocked, actionBtnId) {
+      const card = document.getElementById(tierId);
+      const iconBox = card.querySelector('.tier-icon-box');
+      const statusSpan = card.querySelector('.tier-status');
+      const actionBtn = document.getElementById(actionBtnId);
+
+      if (isUnlocked) {
+        card.className = "tier-card p-3 rounded-xl border border-emerald-500 bg-emerald-50/50 dark:bg-emerald-950/20 flex items-start justify-between gap-3 tier-transition";
+        iconBox.className = "tier-icon-box p-2 rounded-lg bg-emerald-600 text-white flex-shrink-0 mt-0.5";
+        iconBox.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i>';
+        statusSpan.className = "tier-status text-[10px] font-bold text-emerald-600 dark:text-emerald-400";
+        statusSpan.innerText = 'UNLOCKED ✓';
+        actionBtn.classList.remove('hidden');
+      } else {
+        card.className = "tier-card p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#070d18] flex items-start justify-between gap-3 tier-transition";
+        iconBox.className = "tier-icon-box p-2 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 flex-shrink-0 mt-0.5";
+        iconBox.innerHTML = '<i data-lucide="lock" class="w-4 h-4 tier-icon"></i>';
+        statusSpan.className = "tier-status text-[10px] font-semibold text-slate-500";
+        statusSpan.innerText = 'Locked';
+        actionBtn.classList.add('hidden');
+      }
+    }
+
+    function copyReferralLink() {
+      const copyText = document.getElementById("referral-link-input");
+      copyText.select();
+      navigator.clipboard.writeText(copyText.value);
+      const btnText = document.getElementById("copy-btn-text");
+      btnText.innerText = "Copied! ✓";
+      setTimeout(() => { btnText.innerText = "Copy"; }, 2000);
+    }
+
+    function shareOnWhatsApp() {
+      const link = document.getElementById("referral-link-input").value;
+      const text = encodeURIComponent(`Bro, NxtWave is conducting a FREE workshop for final-year engineers: "Build Your First AI Project in 60 Mins".\n\nNo boring theory—we deploy a real live AI web app to add directly to our placement resumes before upcoming campus drives.\n\nRegister free using my invite link: ${link}`);
+      window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+    }
+
+    // ==========================================
+    // FEATURE 2: 4 FULLY WORKING TOUCHPOINTS
+    // ==========================================
+
+    // Action 1: Open Google Calendar & Download .ics Event
+    function handleOpenCalendar() {
+      const studentName = (document.getElementById('reg-name')?.value.trim() || 'Rahul').split(' ')[0];
+      const eventTitle = encodeURIComponent("Build Your First AI Project in 60 Mins - NxtWave");
+      const eventDetails = encodeURIComponent(`Hi ${studentName}! Confirmed seat for NxtWave's live hands-on workshop.\n\nZoom Link: https://zoom.us/test\nPre-workshop Colab: https://colab.research.google.com\n\nOutcome: Deploy live AI app to add to placement resume.`);
+      const eventLocation = encodeURIComponent("Live Online Zoom Room (Link in invite)");
+      const dates = "20261010T133000Z/20261010T143000Z"; // Saturday 7:00 PM IST
+      
+      const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${eventTitle}&dates=${dates}&details=${eventDetails}&location=${eventLocation}`;
+      
+      // 1. Actually open Google Calendar in a new tab!
+      window.open(gcalUrl, '_blank');
+      
+      // 2. Also download real .ics calendar file for local calendar apps
+      const icsData = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//NxtWave//AI Workshop//EN\nBEGIN:VEVENT\nSUMMARY:Build Your First AI Project in 60 Mins - NxtWave\nDESCRIPTION:Live hands-on workshop for final-year engineers. Deploy live AI app.\\nZoom Link: https://zoom.us/test\nLOCATION:Online Zoom\nDTSTART:20261010T133000Z\nDTEND:20261010T143000Z\nEND:VEVENT\nEND:VCALENDAR";
+      const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+      const downloadLink = document.createElement('a');
+      downloadLink.href = window.URL.createObjectURL(blob);
+      downloadLink.setAttribute('download', 'NxtWave_AI_Workshop.ics');
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      
+      triggerPhoneAction("Google Calendar opened in new tab & .ics file downloaded! 📅");
+    }
+
+    // Action 2: Open Google Colab Cloud Workspace
+    function handleOpenColab() {
+      // Actually open Google Colab in a new tab!
+      window.open('https://colab.research.google.com', '_blank');
+      triggerPhoneAction("Google Colab cloud notebook opened in new tab (0 installs needed)! 🚀");
+    }
+
+    // Action 3: Open Zoom Room & Live Stream Simulator
+    function handleJoinZoom() {
+      // 1. Open official Zoom live test room in new tab!
+      window.open('https://zoom.us/test', '_blank');
+      
+      // 2. Open in-page Zoom stream viewer modal
+      openZoomModal();
+      triggerPhoneAction("Zoom meeting opened in new tab & Live Room Stream connected! 🔴");
+    }
+
+    // Action 4: Claim Verifiable Certificate PDF
+    function handleClaimCertificate() {
+      openCertModal();
+      triggerPhoneAction("Official Verifiable Certificate generated with your credentials! 🎓");
+    }
+
+    // WhatsApp Message Data Generator
+    function getWhatsAppData(stepNumber) {
+      const studentName = (document.getElementById('reg-name')?.value.trim() || 'Rahul').split(' ')[0];
+
+      const data = {
+        1: {
+          stepName: "Touchpoint 1 of 4: Admission Ticket & Pass",
+          time: "10:30 AM",
+          content: `
+            <div class="bg-[#1f2c34] rounded-xl p-3 border border-slate-700/60 space-y-2">
+              <div class="flex items-center justify-between border-b border-slate-700 pb-1.5">
+                <span class="font-bold text-emerald-400 text-xs">🎟️ WORKSHOP ADMISSION PASS</span>
+                <span class="text-[10px] text-slate-400 font-mono">#NW-AI-8492</span>
+              </div>
+              <p class="text-xs text-slate-200">
+                Hi <b>${studentName}</b>! You are confirmed for:
+                <br><span class="text-blue-300 font-semibold">"Build Your First AI Project in 60 Mins"</span>
+              </p>
+              <div class="text-[11px] bg-slate-900/80 p-2 rounded text-slate-300 space-y-1">
+                <div>📅 <b>Date:</b> Saturday, 7:00 PM IST</div>
+                <div>⚡ <b>Outcome:</b> Live Deployed App + GitHub Repo</div>
+                <div>💻 <b>Setup:</b> Zero installs. Runs in browser.</div>
+              </div>
+              <div class="pt-1">
+                <button onclick="handleOpenCalendar()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-center py-2 rounded-lg text-xs font-bold text-white transition flex items-center justify-center gap-1.5 shadow">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+                  <span>Add to Google Calendar 📅</span>
+                </button>
+              </div>
+            </div>
+          `
+        },
+        2: {
+          stepName: "Touchpoint 2 of 4: Friction-Killer Checklist",
+          time: "Yesterday, 6:00 PM",
+          content: `
+            <div class="bg-[#1f2c34] rounded-xl p-3 border border-slate-700/60 space-y-2">
+              <div class="font-bold text-blue-300 text-xs flex items-center gap-1">
+                <span>🚀 24 Hours To Go! 0-Setup Test Check</span>
+              </div>
+              <p class="text-xs text-slate-200">
+                Hey ${studentName}! Most coding workshops waste 40 minutes installing Python libraries. We refuse to do that.
+              </p>
+              <p class="text-xs text-slate-300">
+                Here is your 1-click cloud workspace pre-configured:
+              </p>
+              <div class="p-2 bg-slate-900/90 rounded text-[11px] text-blue-300 font-mono flex items-center justify-between">
+                <span>colab.research.google.com/nxtwave-ai</span>
+                <span class="text-[10px] bg-blue-900/60 text-blue-200 px-1.5 py-0.5 rounded">Ready</span>
+              </div>
+              <div class="pt-1">
+                <button onclick="handleOpenColab()" class="w-full bg-blue-600 hover:bg-blue-500 text-center py-2 rounded-lg text-xs font-bold text-white transition flex items-center justify-center gap-1.5 shadow">
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  <span>Open Colab Workspace 🚀</span>
+                </button>
+              </div>
+            </div>
+          `
+        },
+        3: {
+          stepName: "Touchpoint 3 of 4: Direct 1-Tap Zoom Link",
+          time: "6:00 PM (1h Before)",
+          content: `
+            <div class="bg-[#1f2c34] rounded-xl p-3 border border-blue-600/50 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-blue-300 text-xs">🔴 STARTING IN 60 MINUTES</span>
+                <span class="text-[10px] bg-blue-950 text-blue-200 px-1.5 py-0.5 rounded font-bold border border-blue-700 animate-pulse">LIVE</span>
+              </div>
+              <p class="text-xs text-slate-200">
+                ${studentName}, we are going live at 7:00 PM sharp!
+              </p>
+              <p class="text-xs text-slate-300">
+                💡 <b>Special Perk:</b> The first 100 students in the Zoom room will get their personal resume scanned live and tailored by our instructor.
+              </p>
+              <div class="pt-1">
+                <button onclick="handleJoinZoom()" class="w-full bg-blue-600 hover:bg-blue-500 text-center py-2.5 rounded-lg text-xs font-bold text-white transition flex items-center justify-center gap-1.5 shadow">
+                  <i data-lucide="video" class="w-3.5 h-3.5"></i>
+                  <span>👉 Join Live Zoom Room Now</span>
+                </button>
+              </div>
+            </div>
+          `
+        },
+        4: {
+          stepName: "Touchpoint 4 of 4: Certificate & Evaluation",
+          time: "8:15 PM (Post Session)",
+          content: `
+            <div class="bg-[#1f2c34] rounded-xl p-3 border border-emerald-600/50 space-y-2">
+              <div class="font-bold text-emerald-400 text-xs flex items-center gap-1">
+                <span>🏆 Fantastic Job Deploying Your AI App!</span>
+              </div>
+              <p class="text-xs text-slate-200">
+                ${studentName}, congratulations on building and deploying your project live!
+              </p>
+              <div class="p-2.5 bg-slate-900 rounded-lg text-xs space-y-1.5">
+                <div class="text-emerald-400 font-semibold">✓ Project Status: Verified &amp; Live on Public URL</div>
+                <div class="text-slate-300">Download your verified certificate of completion and placement-ready bullet points below:</div>
+              </div>
+              <div class="pt-1">
+                <button onclick="handleClaimCertificate()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-center py-2.5 rounded-lg text-xs font-bold text-white transition flex items-center justify-center gap-1.5 shadow">
+                  <i data-lucide="award" class="w-3.5 h-3.5"></i>
+                  <span>🎓 Claim Verifiable Certificate PDF</span>
+                </button>
+              </div>
+            </div>
+          `
+        }
+      };
+
+      return data[stepNumber];
+    }
+
+    let activeWaStep = 1;
+    function showWhatsAppStep(stepNumber) {
+      activeWaStep = stepNumber;
+      for (let i = 1; i <= 4; i++) {
+        const btn = document.getElementById(`wa-btn-${i}`);
+        const activePill = btn.querySelector('.wa-active-pill');
+        const numBadge = btn.querySelector('.rounded-full');
+
+        if (i === stepNumber) {
+          btn.className = "wa-step-btn w-full text-left p-4 rounded-xl border border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-slate-900 dark:text-white transition flex items-start gap-3 shadow-sm";
+          numBadge.className = "h-7 w-7 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5";
+          if (activePill) activePill.classList.remove('hidden');
+        } else {
+          btn.className = "wa-step-btn w-full text-left p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#070d18] text-slate-700 dark:text-slate-300 hover:border-slate-400 dark:hover:border-slate-700 transition flex items-start gap-3";
+          numBadge.className = "h-7 w-7 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5";
+          if (activePill) activePill.classList.add('hidden');
+        }
+      }
+
+      const msg = getWhatsAppData(stepNumber);
+      document.getElementById('wa-active-step-indicator').innerText = msg.stepName;
+
+      // Hide any previous toast
+      document.getElementById('wa-toast').classList.add('hidden');
+
+      const container = document.getElementById('wa-bubble-container');
+      container.innerHTML = `
+        <div class="space-y-1 fade-enter">
+          ${msg.content}
+          <div class="text-[10px] text-right text-slate-400 pr-1">${msg.time} &bull; Delivered ✓✓</div>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function triggerPhoneAction(toastMessage) {
+      const toast = document.getElementById('wa-toast');
+      toast.innerText = `✓ ${toastMessage}`;
+      toast.classList.remove('hidden');
+      confetti({ particleCount: 35, spread: 50, origin: { y: 0.8 } });
+      setTimeout(() => { toast.classList.add('hidden'); }, 4000);
+    }
+
+    // Auto-Play Drip Sequence Feature
+    let autoPlayTimer = null;
+    function toggleAutoPlayDrip() {
+      if (autoPlayTimer) {
+        clearInterval(autoPlayTimer);
+        autoPlayTimer = null;
+        document.getElementById('autoplay-text').innerText = "Auto-Play Drip Sequence";
+        document.getElementById('btn-autoplay-drip').className = "text-[11px] px-3 py-1 rounded-lg bg-blue-50 dark:bg-blue-950 hover:bg-blue-100 dark:hover:bg-blue-900 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-semibold transition flex items-center gap-1.5";
+      } else {
+        document.getElementById('autoplay-text').innerText = "Playing Flow... (Click to Pause)";
+        document.getElementById('btn-autoplay-drip').className = "text-[11px] px-3 py-1 rounded-lg bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-600 font-semibold transition flex items-center gap-1.5";
+        autoPlayTimer = setInterval(() => {
+          let nextStep = activeWaStep + 1;
+          if (nextStep > 4) nextStep = 1;
+          showWhatsAppStep(nextStep);
+        }, 2800);
+      }
+    }
+
+    // MODAL HANDLERS FOR UNLOCKED PERKS
+    const modalData = {
+      'tier-1': {
+        icon: 'folder-git-2',
+        title: 'Tier 1 Unlocked: GitHub Boilerplate Repo',
+        subtitle: 'Production repo structure ready to clone for your workshop',
+        content: `
+          <div class="space-y-3">
+            <p>Congratulations! You have unlocked the full starter code repo and architecture blueprint:</p>
+            <div class="bg-slate-100 dark:bg-[#070d18] border border-slate-300 dark:border-slate-800 rounded-lg p-3 font-mono text-[11px] text-slate-800 dark:text-slate-300 space-y-1">
+              <div class="text-blue-600 dark:text-blue-400 font-bold">📁 ai-resume-screener-60m/</div>
+              <div class="pl-4">├── 📄 main.py (FastAPI endpoints + Groq client)</div>
+              <div class="pl-4">├── 📄 prompt_template.py (Structured ATS evaluator)</div>
+              <div class="pl-4">├── 📄 requirements.txt (fastapi, uvicorn, groq, pypdf)</div>
+              <div class="pl-4">├── 📄 index.html (Clean modern client interface)</div>
+              <div class="pl-4">└── 📄 README.md (1-click Colab & Vercel deployment)</div>
+            </div>
+            <div class="p-2.5 rounded bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900 text-blue-800 dark:text-blue-300 text-xs">
+              💡 <b>Tip:</b> This code is 100% pre-tested so you never encounter pip installation bottlenecks during the session.
+            </div>
+          </div>
+        `,
+        actionText: 'Copy GitHub Clone Command'
+      },
+      'tier-2': {
+        icon: 'sparkles',
+        title: 'Tier 2 Unlocked: 50 ATS Resume Prompts Pack',
+        subtitle: 'Battle-tested prompts to tailor your resume for campus drives',
+        content: `
+          <div class="space-y-3">
+            <p>You have unlocked the complete 50 High-Impact AI Prompt Templates for placement resumes:</p>
+            <div class="space-y-2">
+              <div class="bg-slate-100 dark:bg-[#070d18] border border-slate-300 dark:border-slate-800 rounded-lg p-2.5 space-y-1">
+                <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase">Prompt #1: High-Conversion Project Bullet</span>
+                <p class="font-mono text-[11px] text-slate-800 dark:text-slate-300">
+                  "Act as an ex-Google tech recruiter. Rewrite this project description into 2 impact-driven bullet points using Google's X-Y-Z formula: Accomplished [X] as measured by [Y] by doing [Z]."
+                </p>
+              </div>
+              <div class="bg-slate-100 dark:bg-[#070d18] border border-slate-300 dark:border-slate-800 rounded-lg p-2.5 space-y-1">
+                <span class="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase">Prompt #2: ATS Keyword Extraction</span>
+                <p class="font-mono text-[11px] text-slate-800 dark:text-slate-300">
+                  "Extract the top 10 required technical keywords from this job description and benchmark my resume against them, listing the critical gaps."
+                </p>
+              </div>
+            </div>
+          </div>
+        `,
+        actionText: 'Copy Prompt Pack to Clipboard'
+      },
+      'tier-3': {
+        icon: 'award',
+        title: 'Tier 3 Unlocked: VIP 1-on-1 Code Review Pass',
+        subtitle: 'Senior tech lead review session confirmed',
+        content: `
+          <div class="space-y-3">
+            <div class="p-3 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-500 rounded-xl space-y-1 text-center">
+              <span class="text-xs font-bold text-emerald-700 dark:text-emerald-400">🎟️ VIP ACCESS PASS GRANTED</span>
+              <h5 class="text-sm font-bold text-slate-900 dark:text-white">1-on-1 AI Project &amp; Resume Audit</h5>
+              <p class="text-xs text-slate-600 dark:text-slate-300">Assigned Reviewer: Senior AI Engineer @ NxtWave Alumni Network</p>
+            </div>
+            <div class="text-xs text-slate-600 dark:text-slate-300 space-y-1">
+              <div>✅ <b>Review Scope:</b> Code cleanliness, GitHub repo presentation, LinkedIn post optimization.</div>
+              <div>✅ <b>Duration:</b> 20-Minute Private Google Meet call post-workshop.</div>
+              <div>✅ <b>Slot Reservation:</b> Priority booking window opens Sunday 10 AM.</div>
+            </div>
+          </div>
+        `,
+        actionText: 'Confirm VIP Calendar Slot'
+      }
+    };
+
+    let activeModalTier = null;
+    function openPerkModal(tierKey) {
+      activeModalTier = tierKey;
+      const data = modalData[tierKey];
+      document.getElementById('modal-title').innerText = data.title;
+      document.getElementById('modal-subtitle').innerText = data.subtitle;
+      document.getElementById('modal-content').innerHTML = data.content;
+      document.getElementById('modal-action-text').innerText = data.actionText;
+      document.getElementById('perk-modal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closePerkModal() {
+      document.getElementById('perk-modal').classList.add('hidden');
+    }
+
+    function executeModalAction() {
+      if (activeModalTier === 'tier-1') {
+        navigator.clipboard.writeText('git clone https://github.com/nxtwave-learning/ai-resume-screener-60m.git');
+        document.getElementById('modal-action-text').innerText = 'Copied git clone! ✓';
+      } else if (activeModalTier === 'tier-2') {
+        navigator.clipboard.writeText('Act as an ex-Google tech recruiter. Rewrite this project description into 2 impact-driven bullet points using Google\'s X-Y-Z formula.');
+        document.getElementById('modal-action-text').innerText = 'Prompts Copied! ✓';
+      } else if (activeModalTier === 'tier-3') {
+        document.getElementById('modal-action-text').innerText = 'Slot Confirmed! ✓';
+        confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
+      }
+      setTimeout(() => { closePerkModal(); }, 1500);
+    }
+
+    // Zoom Modal (Touchpoint 3)
+    function openZoomModal() {
+      document.getElementById('zoom-modal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeZoomModal() {
+      document.getElementById('zoom-modal').classList.add('hidden');
+    }
+
+    // Certificate Modal (Touchpoint 4)
+    function openCertModal() {
+      const studentName = document.getElementById('reg-name')?.value.trim() || 'Rahul Sharma';
+      document.getElementById('cert-student-name').innerText = studentName;
+      document.getElementById('cert-modal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeCertModal() {
+      document.getElementById('cert-modal').classList.add('hidden');
+    }
+
+    function downloadCertificate() {
+      window.print();
+    }
+
+    // Initial setup on page load
+    showWhatsAppStep(1);
+    updateReferralUI();
+  </script>
+</body>
+</html>

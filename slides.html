@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NxtWave Growth Plan | 5-Slide Executive Deck</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+              950: '#0b192c',
+            },
+            navy: {
+              800: '#152238',
+              900: '#0d1829',
+              950: '#070f1e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-navy-950 dark:text-slate-100 min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white transition-colors">
+
+  <!-- Slide Top Bar -->
+  <header class="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-navy-900 px-6 py-4 flex items-center justify-between transition-colors">
+    <div class="flex items-center gap-3">
+      <div class="h-9 w-9 rounded-xl bg-brand-900 dark:bg-blue-600 flex items-center justify-center font-extrabold text-white shadow-sm">NW</div>
+      <div>
+        <h1 class="text-sm font-bold text-slate-900 dark:text-white tracking-tight">NxtWave Growth Intern Challenge &bull; Executive Deck</h1>
+        <p class="text-xs text-slate-500 dark:text-slate-400">Goal: 500 Final-Year Registrations | Budget: ₹2,000 | 7 Days</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <button onclick="toggleTheme()" class="flex items-center gap-1.5 px-3 py-1 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200">
+        <i data-lucide="sun" id="theme-icon" class="w-3.5 h-3.5"></i>
+        <span id="theme-text">Light Mode</span>
+      </button>
+      <span id="slide-indicator" class="text-xs font-mono bg-blue-50 dark:bg-blue-950 text-brand-700 dark:text-blue-300 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-800 font-bold">Slide 1 of 5</span>
+    </div>
+  </header>
+
+  <!-- Slide Canvas Area -->
+  <main class="flex-1 max-w-6xl w-full mx-auto p-6 sm:p-10 flex items-center justify-center">
+
+    <!-- SLIDE 1 -->
+    <div id="slide-1" class="slide w-full space-y-6">
+      <div class="space-y-2">
+        <span class="text-xs font-bold uppercase tracking-wider text-brand-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-950 px-2.5 py-1 rounded border border-blue-200 dark:border-blue-900">Slide 1 &bull; Target Audience &amp; Psychology</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Understanding the Tier-2/3 Final-Year Engineer</h2>
+        <p class="text-slate-500 dark:text-slate-400 text-sm">Ground-level student realities that standard corporate edtech ignores.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+        <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl space-y-3 shadow-sm transition-colors">
+          <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-brand-700 dark:text-blue-400 flex items-center justify-center">
+            <i data-lucide="users" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white">1. Who Exactly?</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            Final-year B.Tech students (Batch 2025/2026) across Tier-2/3 colleges (JNTU, Anna Univ, VTU, AKTU). 70% CSE/IT + 30% Non-CS (ECE/Mech/Civil) eager to break into tech.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl space-y-3 shadow-sm transition-colors">
+          <div class="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white">2. Why Do They Care?</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            Severe placement anxiety. Mass IT hiring is down; 8th-sem major projects are due; and generic resumes are getting auto-rejected by ATS algorithms without modern AI keywords.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl space-y-3 shadow-sm transition-colors">
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+            <i data-lucide="sparkles" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white">3. What Makes Them Sign Up?</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            <span class="font-bold text-brand-900 dark:text-white">The Irresistible Hook:</span> "In 60 minutes, deploy a live AI web app to a public URL with zero environment setup, and add 3 verified bullet points to your resume."
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div id="slide-2" class="slide hidden w-full space-y-6">
+      <div class="space-y-2">
+        <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2.5 py-1 rounded border border-emerald-200 dark:border-emerald-900">Slide 2 &bull; Channel Prioritization</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Prioritized 3-Channel Marketing Strategy</h2>
+        <p class="text-slate-500 dark:text-slate-400 text-sm">Zero ad waste. Concentrating 100% of resources on high-trust distribution networks.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+        <div class="bg-white dark:bg-navy-900 border-2 border-brand-900 dark:border-blue-500 p-6 rounded-2xl space-y-3 relative overflow-hidden shadow-sm">
+          <span class="absolute top-3 right-3 text-[10px] bg-blue-50 dark:bg-blue-900/40 text-brand-700 dark:text-blue-300 px-2 py-0.5 rounded font-bold">Priority #1 &bull; 60%</span>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white">Campus CR Micro-Bounty</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            Incentivize 12 active Class Reps with ₹100 Amazon vouchers upon achieving 25 verified batch signups from unofficial WhatsApp groups.
+          </p>
+          <div class="pt-2 border-t border-slate-100 dark:border-slate-800 text-xs font-mono font-bold text-brand-700 dark:text-blue-400">
+            312 Regs &bull; ₹1,200 Spend &bull; ₹3.84 CPR
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl space-y-3 relative overflow-hidden shadow-sm">
+          <span class="absolute top-3 right-3 text-[10px] bg-purple-50 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 px-2 py-0.5 rounded font-bold">Priority #2 &bull; 27%</span>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white">Viral Milestone Loop</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            P2P gamified unlocks: GitHub starter boilerplate at 1 friend; 50 ATS prompt templates at 3; VIP 1-on-1 code review pass at 5 friends.
+          </p>
+          <div class="pt-2 border-t border-slate-100 dark:border-slate-800 text-xs font-mono font-bold text-purple-700 dark:text-purple-400">
+            146 Regs &bull; ₹750 Spend &bull; K-Factor: 0.38
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl space-y-3 relative overflow-hidden shadow-sm">
+          <span class="absolute top-3 right-3 text-[10px] bg-emerald-50 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 px-2 py-0.5 rounded font-bold">Priority #3 &bull; 15%</span>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white">Placement Tech Communities</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            Value-first code drops on Reddit (r/Btechtards) and placement Telegrams showing a 15-line ATS checker script with workshop RSVP.
+          </p>
+          <div class="pt-2 border-t border-slate-100 dark:border-slate-800 text-xs font-mono font-bold text-emerald-700 dark:text-emerald-400">
+            80 Regs &bull; ₹0 Spend &bull; Pure Organic
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div id="slide-3" class="slide hidden w-full space-y-6">
+      <div class="space-y-2">
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950 px-2.5 py-1 rounded border border-amber-200 dark:border-amber-900">Slide 3 &bull; Numbers &amp; Economics</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Campaign Unit Economics &amp; 7-Day Velocity</h2>
+        <p class="text-slate-500 dark:text-slate-400 text-sm">Rigorous math delivering 538 registrations at ₹3.62 blended CPR.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-2">
+        <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl space-y-3 shadow-sm transition-colors">
+          <h4 class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">Funnel &amp; Spend Attribution</h4>
+          <table class="w-full text-xs text-left">
+            <thead class="text-slate-400 border-b border-slate-200 dark:border-slate-800 pb-1 font-bold">
+              <tr><th>Channel</th><th class="text-right">Signups</th><th class="text-right">Spend</th><th class="text-right">CPR</th></tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+              <tr><td class="py-2">CR Micro-Bounty</td><td class="text-right font-bold text-slate-900 dark:text-white">312</td><td class="text-right">₹1,200</td><td class="text-right font-bold text-emerald-600">₹3.84</td></tr>
+              <tr><td class="py-2">Viral Referral Loop</td><td class="text-right font-bold text-slate-900 dark:text-white">146</td><td class="text-right">₹750</td><td class="text-right font-bold text-emerald-600">₹5.13</td></tr>
+              <tr><td class="py-2">Placement Communities</td><td class="text-right font-bold text-slate-900 dark:text-white">80</td><td class="text-right font-bold text-emerald-600">₹0</td><td class="text-right font-bold text-emerald-600">₹0.00</td></tr>
+              <tr class="font-bold text-slate-900 dark:text-white border-t-2 border-slate-200 dark:border-slate-700"><td class="py-2">Total Campaign</td><td class="text-right text-brand-700 dark:text-blue-400">538</td><td class="text-right text-amber-600">₹1,950</td><td class="text-right text-emerald-600">₹3.62</td></tr>
+            </tbody>
+          </table>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400 italic">*Leaves ₹50 buffer on ₹2,000 budget. Edtech industry CPR benchmark: ₹45–₹80.</p>
+        </div>
+
+        <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl space-y-3 shadow-sm transition-colors">
+          <h4 class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">7-Day Sprint Milestones</h4>
+          <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-300">
+            <li class="flex items-center justify-between"><span class="text-slate-500">Day 1: CR Recruitment &amp; Asset Ready</span><span class="font-mono font-bold text-slate-900 dark:text-white">35 regs</span></li>
+            <li class="flex items-center justify-between"><span class="text-slate-500">Day 2: WhatsApp Batch Wave #1</span><span class="font-mono font-bold text-slate-900 dark:text-white">88 regs</span></li>
+            <li class="flex items-center justify-between"><span class="text-slate-500">Day 3: Reddit &amp; Telegram Value Drops</span><span class="font-mono font-bold text-slate-900 dark:text-white">72 regs</span></li>
+            <li class="flex items-center justify-between"><span class="text-purple-600 font-bold">Day 4: Referral K-Loop Spike</span><span class="font-mono font-bold text-purple-600 dark:text-purple-400">115 regs</span></li>
+            <li class="flex items-center justify-between"><span class="text-slate-500">Day 5: Non-CS Tailoring Follow-Up</span><span class="font-mono font-bold text-slate-900 dark:text-white">94 regs</span></li>
+            <li class="flex items-center justify-between"><span class="text-slate-500">Day 6: VIP Pass Scarcity Push</span><span class="font-mono font-bold text-slate-900 dark:text-white">84 regs</span></li>
+            <li class="flex items-center justify-between"><span class="text-emerald-600 font-bold">Day 7: Final 1-Hour D-Day Alert</span><span class="font-mono font-bold text-emerald-600 dark:text-emerald-400">50 regs</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div id="slide-4" class="slide hidden w-full space-y-6">
+      <div class="space-y-2">
+        <span class="text-xs font-bold uppercase tracking-wider text-cyan-700 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-950 px-2.5 py-1 rounded border border-cyan-200 dark:border-cyan-900">Slide 4 &bull; The Working Asset</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Built: NxtWave Full-Stack Growth Engine</h2>
+        <p class="text-slate-500 dark:text-slate-400 text-sm">Rejecting static landing pages for a gamified, interactive conversion application.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+        <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl space-y-2 shadow-sm transition-colors">
+          <div class="text-brand-700 dark:text-blue-400 font-bold text-sm flex items-center gap-1.5">
+            <i data-lucide="cpu" class="w-4 h-4"></i> Branch-Specific AI Matcher
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-300">
+            Allows students in CSE, ECE, Mechanical, and Civil to select their branch and instantly preview their tailored 60-min build + 3 verified resume bullet points before signing up. Converts reluctant non-CS students.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl space-y-2 shadow-sm transition-colors">
+          <div class="text-purple-600 dark:text-purple-400 font-bold text-sm flex items-center gap-1.5">
+            <i data-lucide="gift" class="w-4 h-4"></i> Gamified Viral Milestone Hub
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-300">
+            Generates instant personal referral links with live milestone progress bars unlocking GitHub starter repos, ATS prompts, and VIP review passes. One-tap WhatsApp deep link for friction-free sharing.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl space-y-2 shadow-sm transition-colors">
+          <div class="text-emerald-600 dark:text-emerald-400 font-bold text-sm flex items-center gap-1.5">
+            <i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp Anti-Drop-Off Flow
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-300">
+            Solves the industry's 70% edtech no-show rate via a 4-touchpoint retention flow: instant ticket pass, 24h zero-install Colab check, 1h live reminder, and post-session certificate evaluation.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl space-y-2 shadow-sm transition-colors">
+          <div class="text-amber-600 dark:text-amber-400 font-bold text-sm flex items-center gap-1.5">
+            <i data-lucide="bar-chart" class="w-4 h-4"></i> Live Growth Lead Dashboard
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-300">
+            Simulates real-time KPI metrics, daily registration velocity curves, and budget burn rate for complete campaign visibility.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div id="slide-5" class="slide hidden w-full space-y-6">
+      <div class="space-y-2">
+        <span class="text-xs font-bold uppercase tracking-wider text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950 px-2.5 py-1 rounded border border-rose-200 dark:border-rose-900">Slide 5 &bull; Thinking &amp; Learnings</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Critical Judgment: What I Rejected &amp; Why</h2>
+        <p class="text-slate-500 dark:text-slate-400 text-sm">Demonstrating learnability, ownership, and human-in-the-loop decision making.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+        <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl space-y-2.5 shadow-sm transition-colors">
+          <span class="text-[10px] font-bold text-rose-700 dark:text-rose-400 uppercase tracking-wider bg-rose-50 dark:bg-rose-950 px-2 py-0.5 rounded">Rejected #1</span>
+          <h3 class="font-bold text-sm text-slate-900 dark:text-white">Meta / Instagram Ads</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">
+            <b class="text-slate-700 dark:text-slate-200">Why:</b> Spending ₹2,000 on Instagram ads yields only ~16 signups at ₹25 CPC (97% failure).
+          </p>
+          <p class="text-xs text-emerald-600 dark:text-emerald-400 font-bold">
+            Pivoted to: WhatsApp CR micro-incentives (312 signups at ₹3.84 CPR).
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl space-y-2.5 shadow-sm transition-colors">
+          <span class="text-[10px] font-bold text-rose-700 dark:text-rose-400 uppercase tracking-wider bg-rose-50 dark:bg-rose-950 px-2 py-0.5 rounded">Rejected #2</span>
+          <h3 class="font-bold text-sm text-slate-900 dark:text-white">LangChain RAG Pipeline</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">
+            <b class="text-slate-700 dark:text-slate-200">Why:</b> Complex local Docker/vector DB setup crashes on 4GB RAM college laptops.
+          </p>
+          <p class="text-xs text-emerald-600 dark:text-emerald-400 font-bold">
+            Pivoted to: Zero-install Gemini API app on Streamlit Cloud (100% completion rate).
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-navy-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl space-y-2.5 shadow-sm transition-colors">
+          <span class="text-[10px] font-bold text-rose-700 dark:text-rose-400 uppercase tracking-wider bg-rose-50 dark:bg-rose-950 px-2 py-0.5 rounded">Rejected #3</span>
+          <h3 class="font-bold text-sm text-slate-900 dark:text-white">"Win an iPad" Sweepstakes</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">
+            <b class="text-slate-700 dark:text-slate-200">Why:</b> Unbelievable on a ₹2,000 budget; college students ignore fake lucky draws.
+          </p>
+          <p class="text-xs text-emerald-600 dark:text-emerald-400 font-bold">
+            Pivoted to: Deterministic academic perks (GitHub repos, ATS prompts, VIP reviews).
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Slide Footer / Controls -->
+  <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-navy-900 px-6 py-4 flex items-center justify-between transition-colors">
+    <div class="text-xs text-slate-500 hidden sm:block">
+      Use Left &amp; Right Arrow Keys to Navigate Slides
+    </div>
+    <div class="flex items-center gap-3 mx-auto sm:mx-0">
+      <button onclick="prevSlide()" id="btn-prev" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-white rounded-xl text-xs font-bold transition flex items-center gap-1 disabled:opacity-40" disabled>
+        <i data-lucide="chevron-left" class="w-4 h-4"></i> Previous
+      </button>
+      <div class="flex items-center gap-1.5" id="dot-indicators">
+        <span class="w-2.5 h-2.5 rounded-full bg-brand-900 dark:bg-blue-500"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+      </div>
+      <button onclick="nextSlide()" id="btn-next" class="px-4 py-2 bg-brand-900 hover:bg-brand-800 dark:bg-blue-600 dark:hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1">
+        Next <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    function toggleTheme() {
+      const htmlEl = document.documentElement;
+      const isDark = htmlEl.classList.contains('dark');
+      if (isDark) {
+        htmlEl.classList.remove('dark');
+        document.getElementById('theme-icon').setAttribute('data-lucide', 'moon');
+        document.getElementById('theme-text').innerText = 'Dark Blue';
+      } else {
+        htmlEl.classList.add('dark');
+        document.getElementById('theme-icon').setAttribute('data-lucide', 'sun');
+        document.getElementById('theme-text').innerText = 'Clean White';
+      }
+      lucide.createIcons();
+    }
+
+    let currentSlide = 1;
+    const totalSlides = 5;
+
+    function showSlide(n) {
+      for (let i = 1; i <= totalSlides; i++) {
+        document.getElementById(`slide-${i}`).classList.add('hidden');
+      }
+      document.getElementById(`slide-${n}`).classList.remove('hidden');
+
+      document.getElementById('slide-indicator').innerText = `Slide ${n} of ${totalSlides}`;
+      document.getElementById('btn-prev').disabled = (n === 1);
+      document.getElementById('btn-next').disabled = (n === totalSlides);
+
+      const dots = document.getElementById('dot-indicators').children;
+      for (let i = 0; i < totalSlides; i++) {
+        dots[i].className = (i + 1 === n) ? 'w-2.5 h-2.5 rounded-full bg-brand-900 dark:bg-blue-500' : 'w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-700';
+      }
+
+      lucide.createIcons();
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        showSlide(currentSlide);
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        showSlide(currentSlide);
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+  </script>
+</body>
+</html>

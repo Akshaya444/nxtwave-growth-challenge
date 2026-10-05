@@ -30,13 +30,4 @@ All files are self-contained in this directory: C:\Users\HP\.gemini\antigravity\
 4. **VIDEO_SCRIPT_3MIN.md (3-Minute Presentation Walkthrough):**
    - Word-for-word timed script (0:00 to 3:00) with visual screen-sharing directions and Loom recording advice.
 
----
 
-## 🚀 How to Submit to the Google Form
-
-1. **Growth Plan:** Upload GROWTH_PLAN_SUBMISSION.md (as PDF or link to Google Doc/Slides).
-2. **Working Asset Link:** 
-   - You can host index.html on GitHub Pages, Vercel, or Netlify (drag-and-drop takes 30 seconds), OR provide a Google Drive / Loom walkthrough link.
-3. **AI Notes:** Copy content from AI_LEARNING_NOTES.md.
-4. **Video:** Record a 3-minute Loom video using VIDEO_SCRIPT_3MIN.md while sharing your screen with index.html open.
-5. **Form URL:** [https://forms.gle/xEtJSgJfeqvnxv8q6](https://forms.gle/xEtJSgJfeqvnxv8q6)
